@@ -1,9 +1,10 @@
-import React from 'react';
-import { expect } from 'chai';
-import * as ActionCreators from './fuelSavingsActions';
-import * as ActionTypes from '../constants/actionTypes';
+/* globals describe, it */
+// import React from 'react'
+import { expect } from 'chai'
+import * as ActionCreators from './fuelSavingsActions'
+import * as ActionTypes from '../constants/actionTypes'
 
-describe('Actions', function() {
+describe('Actions', function () {
   const appState = {
     newMpg: 20,
     tradeMpg: 10,
@@ -19,29 +20,29 @@ describe('Actions', function() {
       annual: 0,
       threeYear: 0
     }
-  };
+  }
 
-  it('should create an action to save fuel savings', function() {
+  it('should create an action to save fuel savings', function () {
     const expected = {
       type: ActionTypes.SAVE_FUEL_SAVINGS,
       settings: appState
-    };
+    }
 
-    expect(ActionCreators.saveFuelSavings(appState)).to.deep.equal(expected); // Notice use of deep because it's a nested object
-    // expect(ActionCreators.saveFuelSavings(appState)).to.equal(expected); // Fails. Not deeply equal
-  });
+    expect(ActionCreators.saveFuelSavings(appState)).to.deep.equal(expected) // Notice use of deep because it's a nested object
+  // expect(ActionCreators.saveFuelSavings(appState)).to.equal(expected); // Fails. Not deeply equal
+  })
 
-  it('should create an action to calculate fuel savings', function() {
-    const fieldName = 'newMpg';
-    const value = 100;
+  it('should create an action to calculate fuel savings', function () {
+    const fieldName = 'newMpg'
+    const value = 100
 
     const expected = {
       type: ActionTypes.CALCULATE_FUEL_SAVINGS,
       settings: appState,
       fieldName: fieldName,
       value: value
-    };
+    }
 
-    expect(ActionCreators.calculateFuelSavings(appState, fieldName, value)).to.deep.equal(expected);
-  });
-});
+    expect(ActionCreators.calculateFuelSavings(appState, fieldName, value)).to.deep.equal(expected)
+  })
+})

@@ -1,9 +1,10 @@
-import * as ActionTypes from '../constants/actionTypes';
-import { createStore } from 'redux';
-import { expect } from 'chai';
-import rootReducer from '../reducers';
-import calculator from '../businessLogic/fuelSavingsCalculator';
-import dateHelper from '../businessLogic/dateHelper';
+/* globals describe, it */
+import * as ActionTypes from '../constants/actionTypes'
+import { createStore } from 'redux'
+import { expect } from 'chai'
+import rootReducer from '../reducers'
+import calculator from '../businessLogic/fuelSavingsCalculator'
+import dateHelper from '../businessLogic/dateHelper'
 
 const initialState = {
   fuelSavingsAppState: {
@@ -17,17 +18,16 @@ const initialState = {
     dateModified: null,
     necessaryDataIsProvidedToCalculateSavings: false,
     savings: {
-        monthly: 0,
-        annual: 0,
-        threeYear: 0
+      monthly: 0,
+      annual: 0,
+      threeYear: 0
     }
   }
-};
+}
 
-
-describe('Store', function() {
+describe('Store', function () {
   it('should display results when necessary data is provided', function () {
-    const store = createStore(rootReducer, initialState);
+    const store = createStore(rootReducer, initialState)
 
     const actions = [
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'newMpg', value: 20 },
@@ -36,10 +36,10 @@ describe('Store', function() {
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'tradePpg', value: 1.50 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'milesDriven', value: 100 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'milesDrivenTimeframe', value: 'month' }
-    ];
-    actions.forEach(action => store.dispatch(action));
+    ]
+    actions.forEach((action) => store.dispatch(action))
 
-    const actual = store.getState();
+    const actual = store.getState()
     const expected = {
       newMpg: 20,
       tradeMpg: 10,
@@ -51,13 +51,13 @@ describe('Store', function() {
       dateModified: dateHelper.getFormattedDateTime(new Date()),
       necessaryDataIsProvidedToCalculateSavings: true,
       savings: calculator().calculateSavings(store.getState().fuelSavingsAppState)
-    };
+    }
 
-    expect(actual.fuelSavingsAppState).to.deep.equal(expected);
-  });
+    expect(actual.fuelSavingsAppState).to.deep.equal(expected)
+  })
 
-  it('should not display results when necessary data is not provided', function() {
-    const store = createStore(rootReducer, initialState);
+  it('should not display results when necessary data is not provided', function () {
+    const store = createStore(rootReducer, initialState)
 
     const actions = [
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'newMpg', value: 20 },
@@ -66,11 +66,11 @@ describe('Store', function() {
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'tradePpg', value: 1.50 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'milesDriven', value: 100 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'milesDrivenTimeframe', value: 'month' }
-    ];
+    ]
 
-    actions.forEach(action => store.dispatch(action));
+    actions.forEach(action => store.dispatch(action))
 
-    const actual = store.getState();
+    const actual = store.getState()
 
     const expected = {
       newMpg: 20,
@@ -83,15 +83,13 @@ describe('Store', function() {
       dateModified: dateHelper.getFormattedDateTime(new Date()),
       necessaryDataIsProvidedToCalculateSavings: false,
       savings: { annual: 0, monthly: 0, threeYear: 0 }
-    };
+    }
 
-
-    expect(actual.fuelSavingsAppState).to.deep.equal(expected);
-  });
-
+    expect(actual.fuelSavingsAppState).to.deep.equal(expected)
+  })
 
   it('should handle a flurry of actions', function () {
-    const store = createStore(rootReducer, initialState);
+    const store = createStore(rootReducer, initialState)
 
     const actions = [
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'newMpg', value: 20 },
@@ -110,21 +108,21 @@ describe('Store', function() {
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'newMpg', value: 20 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'tradeMpg', value: 10 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'newPpg', value: 1.50 }
-    ];
-    actions.forEach(action => store.dispatch(action));
+    ]
+    actions.forEach(action => store.dispatch(action))
 
-    const lastGoodSavings = calculator().calculateSavings(store.getState().fuelSavingsAppState);
+    const lastGoodSavings = calculator().calculateSavings(store.getState().fuelSavingsAppState)
 
     const moreActions = [
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'tradePpg', value: 0 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'milesDriven', value: 100 },
       { type: ActionTypes.CALCULATE_FUEL_SAVINGS, settings: store.getState(), fieldName: 'milesDrivenTimeframe', value: 'year' }
-    ];
+    ]
 
-    // actions.push(...moreActions);
-    moreActions.forEach(action => store.dispatch(action));
+    // actions.push(...moreActions)
+    moreActions.forEach(action => store.dispatch(action))
 
-    const actual = store.getState();
+    const actual = store.getState()
     const expected = {
       newMpg: 20,
       tradeMpg: 10,
@@ -136,8 +134,8 @@ describe('Store', function() {
       dateModified: dateHelper.getFormattedDateTime(new Date()),
       necessaryDataIsProvidedToCalculateSavings: false,
       savings: lastGoodSavings
-    };
+    }
 
-    expect(actual.fuelSavingsAppState).to.deep.equal(expected);
-  });
-});
+    expect(actual.fuelSavingsAppState).to.deep.equal(expected)
+  })
+})

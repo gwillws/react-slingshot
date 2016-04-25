@@ -1,10 +1,10 @@
-import webpack from 'webpack';
-import path from 'path';
+import webpack from 'webpack'
+import path from 'path'
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('development'),
   __DEV__: true
-};
+}
 
 export default {
   debug: true,
@@ -16,20 +16,26 @@ export default {
   ],
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
-    path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.join(__dirname, '/dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: '/',
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.DefinePlugin(GLOBALS), //Tells React to build in prod mode. https://facebook.github.io/react/downloads.htmlnew webpack.HotModuleReplacementPlugin());
+    new webpack.DefinePlugin(GLOBALS), // Tells React to build in prod mode. https://facebook.github.io/react/downloads.htmlnew webpack.HotModuleReplacementPlugin())
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
   module: {
+    preLoaders: [
+      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['standard']}
+    ],
     loaders: [
-      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
+      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel']},
       {test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file']},
-      {test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']}
-    ]
+      {test: /(\.css|\.sass)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']}
+    ],
+    standard: {
+      parser: 'babel-eslint'
+    }
   }
-};
+}
