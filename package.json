@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bulma": "0.0.24",
+    "font-awesome": "4.6.1",
     "object-assign": "4.0.1",
     "react": "15.0.1",
     "react-dom": "15.0.1",
@@ -59,6 +60,7 @@
     "standard": "6.0.8",
     "standard-loader": "3.0.0",
     "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
     "webpack": "1.12.15",
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0"
