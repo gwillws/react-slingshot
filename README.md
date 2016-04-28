@@ -15,6 +15,8 @@ React Slingshot is a comprehensive starter kit for rapid application development
 | ~~[ESLint](http://eslint.org/)~~| ~~Lint JS. Reports syntax and style issues. Using [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) for additional React specific linting rules.~~ | |
 | [StandardJS](http://standardjs.com/) | One Style to Rule Them All |
 | [SASS](http://sass-lang.com/) | Compiled CSS styles with variables, functions, and more. | [Pluralsight Course](https://www.pluralsight.com/courses/better-css)|
+| [Font Awesome](http://fontawesome.io) | Awesome icons with awesome features. | [Get started](http://fontawesome.io/get-started/)|
+| [Bulma](http://bulma.io) | A modern CSS Framework based on Flexbox | [Documentation](http://bulma.io/documentation/overview/start/)|
 | [Editor Config](http://editorconfig.org) | Enforce consistent editor settings (spaces vs tabs, etc). | [IDE Plugins](http://editorconfig.org/#download) |
 | [npm Scripts](https://docs.npmjs.com/misc/scripts)| Glues all this together in a handy automated build. | [Pluralsight course](https://www.pluralsight.com/courses/npm-build-tool-introduction), [Why not Gulp?](https://medium.com/@housecor/why-i-left-gulp-and-grunt-for-npm-scripts-3d6853dd22b8#.vtaziro8n)  |
 

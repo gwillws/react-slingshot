@@ -35,8 +35,13 @@ export default {
       {
         test: /(\.css|\.sass)$/,
         include: path.join(__dirname, 'src'),
-        loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
-      }
+        loader: ExtractTextPlugin.extract('css!sass?sourceMap')
+      },
+      {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
+      {test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
+      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
+      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
     ],
     standard: {
       parser: 'babel-eslint'
